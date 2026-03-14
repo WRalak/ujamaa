@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Chatbot from '@/components/Chatbot'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import './globals.css'
 
 export const metadata = {
@@ -19,36 +20,38 @@ export default function RootLayout({ children }) {
         <StoreProvider>
           <ThemeProvider>
             <CurrencyProvider>
-              <Navbar />
-              <main className="flex-1 min-h-screen">
-                {children}
-              </main>
-              <Footer />
-              <Chatbot />
-              <Toaster
-                position="top-right"
-                toastOptions={{
-                  duration: 3000,
-                  style: {
-                    background: '#363636',
-                    color: '#fff',
-                  },
-                  success: {
+              <ErrorBoundary>
+                <Navbar />
+                <main className="flex-1 min-h-screen">
+                  {children}
+                </main>
+                <Footer />
+                <Chatbot />
+                <Toaster
+                  position="top-right"
+                  toastOptions={{
                     duration: 3000,
-                    iconTheme: {
-                      primary: '#10b981',
-                      secondary: '#fff',
+                    style: {
+                      background: '#363636',
+                      color: '#fff',
                     },
-                  },
-                  error: {
-                    duration: 3000,
-                    iconTheme: {
-                      primary: '#ef4444',
-                      secondary: '#fff',
+                    success: {
+                      duration: 3000,
+                      iconTheme: {
+                        primary: '#10b981',
+                        secondary: '#fff',
+                      },
                     },
-                  },
-                }}
-              />
+                    error: {
+                      duration: 3000,
+                      iconTheme: {
+                        primary: '#ef4444',
+                        secondary: '#fff',
+                      },
+                    },
+                  }}
+                />
+              </ErrorBoundary>
             </CurrencyProvider>
           </ThemeProvider>
         </StoreProvider>
